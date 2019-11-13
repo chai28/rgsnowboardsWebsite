@@ -1,0 +1,25 @@
+.form-style {
+    padding-top: 0px !important;
+    background-color: rgb(233, 220, 220, 0.4);
+    margin-bottom: 100px;
+}
+
+.login-form {
+    width: 362px;
+    margin: 50px auto;
+    padding: 30px
+}
+
+.signUp-form {
+    width: 562px;
+    margin: 50px auto;
+    padding: 30px
+}
+
+.signup a {
+    color: #aa3105
+}
+
+#cke_editor1 {
+    margin-left: 40px;
+}
