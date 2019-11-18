@@ -4,19 +4,17 @@
 
 	if(isset($_POST['post'])){
 
+		$id = $_GET['id'];
         $category = $_POST['category'];
 		$title = $_POST['title'];
 		$thumbnail = $_FILES['thumbnail']['name'];
 		$body = $_POST['editor1'];
-		$carousel = $_FILES['carousel']['name'];
+		//$carousel = $_FILES['carousel']['name'];
         $categoryid ;
-        
-        $id = $_GET['blogId'];
 
 		// Count # of uploaded files in array
-		$total = count($carousel);
-		echo "count:", $total;
-
+		// $total = count($carousel);
+		// echo "count:", $total;
 
 		try{
             //Check the category list
@@ -31,14 +29,23 @@
 				$stmt->execute(['category'=>$category]);
 				$categoryid = $conn->lastInsertId();
 			}
-			move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'images/'.$thumbnail);
-			$filename =  'images/'.$thumbnail;
+			//check thumbnail
+			if(!empty($thumbnail)){
+				move_uploaded_file($_FILES['thumbnail']['tmp_name'], 'images/'.$thumbnail);
+				$filename =  'images/'.$thumbnail;
+			}
+			else{
+				$stmt = $conn->prepare("SELECT thumbnail FROM blog WHERE blogId = :blogId");
+				$stmt->execute(['blogId'=>$id]);
+				$row1 = $stmt->fetch();
+				$filename = $row1['thumbnail'];
+			}
 			
-            //Insert into blog Table 
-			$stmt = $conn->prepare("UPDATE blog SET blogName=:title, thumbnail=:thumbnail, blogContent=:body, blogCatID=:categoryid) WHERE blogId=:blogId");
+			
+			//insert into blog table
+			$stmt = $conn->prepare("UPDATE blog SET blogName= :title, thumbnail= :thumbnail, blogContent= :body, blogCatID= :categoryid WHERE blogId= :blogId");
 			$stmt->execute(['title'=>$title, 'thumbnail'=>$filename, 'body'=>$body, 'categoryid'=>$categoryid, 'blogId'=>$id]);
 			$id = $conn->lastInsertId();
-
 			
 			// // Loop through each file
 			// for( $i=0 ; $i < $total ; $i++ ) {

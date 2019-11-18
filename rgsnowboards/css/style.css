@@ -389,6 +389,11 @@ h5,
   background: #000;
 }
 
+.profile-image {
+  width: 200px;
+  height: 200px;
+}
+
 .form-control {
   height: 55px;
   background: #fff !important;

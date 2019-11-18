@@ -8,6 +8,7 @@
         $stmt = $conn->prepare("SELECT blogName, blogContent, blogDate FROM blog WHERE blogId = :blog");
         $stmt->execute(['blog'=>$blog]);
         $row = $stmt->fetch();
+        
     }catch(PDOException $e){
         echo"ERROR!!!!";
         echo "There is some problem in connection: " . $e->getMessage();
@@ -16,42 +17,46 @@
     include 'includes/head.php';
 
 ?>
-
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
  
-  <!-- Responsive -->
-  <?php include 'includes/responsive.php'; ?>
+ <?php include 'includes/headdashboard.php'; ?>
 
-  <!-- Header -->
-  <?php include 'includes/headerdashboard.php'; ?>
-  <?php include 'includes/headeradmin.php'; ?>
-  
-    <div class="site-section">
-      <div class="container">
+<body class="sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <!-- header -->
+    <?php include 'includes/headeradmin.php'; ?>
+    <!-- Sidebar -->
+    <?php include 'includes/sidebar.php'; ?>
+
+
+    <div class="content-wrapper">
+     <!-- include "carousel.php"?> -->
+    <section class="content">
+      <div class="container-fluid">
         <div class="row">
             <div class='post-entry-1'>
-                <a href='single.php'>
-                    <img src='images/img_1.jpg' alt='Image'
-                    class='img-fluid' style='height:250px;'>
-                </a>
                 <div class='post-entry-1-contents'>
-                    <h2 style="text-align: center;"><a href="#"><?php echo $row['blogName'];?></a></h2>
-                    <span class='meta d-inline-block mb-3'>Date Created: <?php echo date_format(date_create($row['blogDate']),'d/m/Y'); ?></span>
+                    <h2 style="text-left: center; text-transform: uppercase"><a href="#"><b><?php echo $row['blogName'];?></b></a></h2>
+                    <? echo "title: ", $row['blogName'], date_format(date_create($row['blogDate']),'d/m/Y'); ?>
+                    <span class='meta d-inline-block mb-3'>Created: <?php echo date_format(date_create($row['blogDate']),'d/m/Y'); ?></span>
                     <div style="text-align: justify;" ><?php echo $row['blogContent'];?></div>
                 </div>
             </div>   
         </div>
       </div>
-    </div> <!-- END .site-section -->
-    
-    <?php $pdo->close(); ?>
-    <!-- Subscribe Section -->
-    <?php include 'subscribe.php'; ?>
-
-    <!-- Footer -->
-    <?php include 'includes/footer.php'; ?>
-
+    </section> <!-- END .site-section -->
     </div>
+    <!-- /.content-wrapper -->
+    <?php $pdo->close(); ?>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  <!-- Footer -->
+  <?php include 'footeradmin.php'; ?>
+  </div>
+  <!-- ./wrapper -->
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-migrate-3.0.0.js"></script>
@@ -73,4 +78,3 @@
   </body>
 
 </html>
-

@@ -41,7 +41,7 @@
             </div>
             <div class="form-group">
                 <label for="body" style="margin-left: 20px;">Post Body</label>
-                <textarea name="editor1" id="editor" style="height:500px;"></textarea>
+                <textarea name="editor1" id="editor"></textarea>
             </div> 
             <div class="form-group">
                 <label for="carousel" style="margin-left: 20px;">Carousel Photos</label>
@@ -59,6 +59,10 @@
 </div>
 <?php  $pdo->close(); ?>
 <script>
+    CKEDITOR.replace("editor1",
+    {
+        height: 500
+    });
     ClassicEditor
     .create( document.querySelector( '#editor' ) )
     .then( editor => {

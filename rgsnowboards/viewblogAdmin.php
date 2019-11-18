@@ -1,17 +1,18 @@
 <?php include 'includes/session.php'; ?>
 <?php include 'includes/headdashboard.php'; ?>
 
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<body class="sidebar-mini layout-fixed">
 <div class="wrapper">
 
     <!-- header -->
-    <?php include 'includes/adminViewHeader.php'; ?>
+    <?php include 'includes/headeradmin.php'; ?>
+    <!-- Sidebar -->
+    <?php include 'includes/sidebar.php'; ?>
 
-    
+
+    <div class="content-wrapper">
     <div class="site-section">
       <div class="container">
-
-       
         <div class="row">
             <?php
                 $conn = $pdo->open();
@@ -29,12 +30,12 @@
                         echo '
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="post-entry-1 h-100">
-                                    <a href="singleAdmin.php?id=$id">
+                                    <a href="singleAdmin.php?id='.$id.'">
                                         <img src="'.$image.'"
-                                        class="img-fluid">
+                                        class="img-fluid" style="height:350px;width:370px;">
                                     </a>
-                                    <div class="post-entry-1-contents">
-                                        <h2><a href="singleAdmin.php?id='.$id.'" >'.$row['blogName'].'</a></h2>
+                                    <div class="post-entry-1-contents" style="height:100px;>
+                                        <h2><b><a href="singleAdmin.php?id='.$id.'" >'.$row['blogName'].'</a></b></h2><br>
                                         <span class="meta d-inline-block mb-3">'
                                             .date_format(date_create($row['blogDate']),'d/m/Y').'
                                             <span class="mx-2">by</span> 
@@ -67,14 +68,15 @@
       </div>
     </div> <!-- END .site-section -->
     
-    
-    <!-- Subscribe Section -->
-    <?php include 'subscribe.php'; ?>
-
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     <!-- Footer -->
-    <?php include 'includes/footer.php'; ?>
-
+    <?php include 'footeradmin.php'; ?>
     </div>
+    <!-- ./wrapper -->
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-migrate-3.0.0.js"></script>

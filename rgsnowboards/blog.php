@@ -13,8 +13,6 @@
     
     <div class="site-section">
       <div class="container">
-
-       
         <div class="row">
             <?php
                 include 'includes/session.php';
@@ -33,12 +31,12 @@
                         echo '
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="post-entry-1 h-100" data-aos="fade-right">
-                                    <a href="singleAdmin.php?id=$id">
+                                    <a href="singleAdmin.php?id='.$id.'">
                                         <img src="'.$image.'"
-                                        class="img-fluid">
+                                        <class="img-fluid" style="height:350px;width:370px;">
                                     </a>
-                                    <div class="post-entry-1-contents" data-aos="fade-left">
-                                        <h2><a href="singleAdmin.php?id='.$id.'" >'.$row['blogName'].'</a></h2>
+                                    <div class="post-entry-1-contents" style="height:100px;>
+                                        <h2><b><a href="singleAdmin.php?id='.$id.'" >'.$row['blogName'].'</a></b></h2><br>
                                         <span class="meta d-inline-block mb-3">'
                                             .date_format(date_create($row['blogDate']),'d/m/Y').'
                                             <span class="mx-2">by</span> 
