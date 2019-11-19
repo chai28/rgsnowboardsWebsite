@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+
 <div class="container">
     <div class="site-section">
         <div class="row justify-content-center text-center">

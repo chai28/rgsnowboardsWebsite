@@ -1,6 +1,6 @@
 <?php
 	include 'includes/connection.php';
-	session_start();
+	//session_start();
 
 	if(isset($_SESSION['admin'])){
 		header('location: home.php');

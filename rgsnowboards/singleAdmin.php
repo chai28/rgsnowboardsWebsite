@@ -30,7 +30,7 @@
 
 
     <div class="content-wrapper">
-     <!-- include "carousel.php"?> -->
+    <?php include "carousel.php"?> 
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -54,7 +54,7 @@
     </aside>
     <!-- /.control-sidebar -->
   <!-- Footer -->
-  <?php include 'footeradmin.php'; ?>
+  <?php include 'includes/footeradmin.php'; ?>
   </div>
   <!-- ./wrapper -->
 

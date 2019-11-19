@@ -2,7 +2,9 @@
     $blogId = $_GET['id'];
     
     try{
-      $stmt = $conn->query("SELECT image FROM blog_carousel WHERE blogId= $blog");
+      $stmt = "SELECT image FROM blog_carousel WHERE blogId= :id";
+      $sql = $conn->prepare($stmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
+      $sql->execute(['id'=>$blogId]);   
       echo '
         <div class="site-section">
         <div class="container">
@@ -10,8 +12,8 @@
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">';
         $addActive="";
       //Get the images for carousel display
-      while($row1 = $res->fetch_assoc()){
-        for($i=0; $i<count($row1); $i++){
+      $i=0;
+      while($image = $sql->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)){
             if($i==0){
               $addActive="active";
             }
@@ -20,11 +22,12 @@
             }
           echo '<div class="carousel-inner">
                   <div class="carousel-item ' . $addActive . '">
-                    <img class="d-block w-100" src="'.$image[$i]['image'].'">
+                    <img class="d-block w-100" src="'.$image[0].'">
                   </div>
                 </div>';
+          $i=1;
         }
-      }
+      
         echo '
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
